@@ -1,0 +1,116 @@
+Buenas prácticas de desarrollo:
+
+	Código limpio y bien documentado.
+	Principios SOLID, en especial el de responsabilidad única.
+	Uso de patrones de diseño MVc, Middleware, Facades, CQRS.
+	Uso del standard psr-4.
+	Pruebas funcionales de los métodos desarrollados en cada clase.
+	Se utilizó el patrón de Middleware como estrategia de seguridad de la aplicación.
+	Se manejaron excepciones por posibles fallas al consultar la api externa.
+	
+Manejador de versiones:
+
+	Repositorio en Github para poder clonar el proyecto desde:
+	
+	
+	
+Utilización de contenedores Docker:
+
+	Repositorio en Dockerhub para hacer Pull y Run de la imagen del contenedor:	
+	
+	pabloblanco2025/reservandonos:latest
+	
+Documentación del código:
+
+	Se documentaron:
+	
+		Los campos de las tablas y las migraciones.
+		Los modelos y las relaciones.
+		Las rutas y los controladores.
+		Los archivos de pruebas.
+
+Versiones utilizadas:
+
+	PHP 8.3.1
+	MySQL 8.0.32
+	Composer 2.70
+	Laravel 10.43.0
+	Breeze 1.4
+	Guzzle 7.8
+	Tailwind 3.2.1
+	Inertia 0.6.8
+	Vue 3.4.16
+	Node 20.11.0
+	NPM 10.4.0
+	Vite 5.1.0
+	Sail 1.27	
+	Docker Compose 2.23.3
+	Docker Desktop 4.27.1
+	
+Despliegue del proyecto en local para pruebas:
+
+	Asegurate de tener Docker instalado.
+	
+	Crea la carpeta en la que necesitas tener el proyecto.
+	
+	Dentro de la carpeta, ejecuta el siguiente comando para bajar la imagen del contenedor:
+
+		docker pull pabloblanco2025/reservandonos:latest
+	
+	Ejecutas tu contenedor Laravel basado en la imagen pabloblanco2025/reservandonos:latest.
+	
+	Inicia el servidor con docker exec -it <nombre_del_contenedor> npm run dev para que vite sirva los archivos del front correctamente.
+
+	Notas:
+	
+		La configuración del contenedor Laravel incluye la dependencia de una base de datos MySQL, por ejemplo, con la línea mysql:latest en el archivo docker-compose.yml.
+
+		Docker Compose, o el comando docker run, si estás ejecutando contenedores directamente, detectan que no tienes la imagen mysql:latest localmente.
+
+		Docker descarga automáticamente la imagen mysql:latest desde Docker Hub antes de iniciar los contenedores.
+
+		Se iniciarán los contenedores, y la aplicación Laravel y MySQL estarán en funcionamiento.
+	
+Gestión del proyecto:
+
+	General:
+		Tiempo de configuración y desarrollo: 8hs.
+		Tiempo de documentación y despliegue: 4hs.
+		
+	Backend:
+		Se desarrollaron 4 componentes, quedaron pendientes 2.
+		Se crearon 4 migraciones y 4 modelos.
+		Se realizaro pruebas funcionales.
+		
+	Frontend:
+		Se crearon 3 componentes, quedan pendientes 3.
+		
+Feedbak del proyecto:
+
+
+Backlog del proyecto:
+	
+	Laravel:
+	
+		1.-Optimizar Laravel para maximizar el uso de recursos del servidor con Octane y Swoole.
+		2.-De ser necesario, configurar la base de datos con el patrón CQRS de segregación de responsabilidades para optimizar su uso.
+	
+	Aplicación:
+	
+		1.-Rutas: Pasar las rutas de consulta de la API externa al archivo de rutas api.php para funcionar como api intermedia por principio de responsabilidad única.
+		
+		2.-Excepciones: Crear excepciones personalizadas para hacer más mantenible el código.
+		
+		3.-Página del listado de lugares:
+			3.1.-Dar funcinalidad al botón del corazón que suma likes.
+			3.2.-Dar funcionalidad al botón ver más del paginador que muestra más resultados.
+		
+		4.-Página con la información del lugar seleccionado:
+			4.1.-Dar funcionalidad al popup que muestra el resto de las imagenes del lugar.
+			4.2.-Dar funcionalidad al botón de Reservar con modalBooking.
+			
+		5.-Página del top 5 de lugares que más reservaciones y likes tienen:
+			5.1.-Mostrar la vista del componente Vue con la tabla de 5 lugares.
+			5.2.-Dar funcionalidad al controlador para enviar los datos con la vista.
+	
+	
