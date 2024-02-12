@@ -75,15 +75,21 @@ Se documentaron:
 
 1.-Asegurate de tener Docker instalado.
 	
-2.-Crea la carpeta en la que necesitas tener el proyecto.
-	
-3.-Dentro de la carpeta, ejecuta el siguiente comando para bajar la imagen del contenedor:
+2.-Ejecuta el siguiente comando para bajar la imagen del contenedor y revisar la aplicación dentro del mismo:
 
     docker pull pabloblanco2025/reservandonos:latest
-	
-4.-Ejecutas tu contenedor Laravel basado en la imagen pabloblanco2025/reservandonos:latest.
-	
-5.-Inicia el servidor con docker exec -it pabloblanco2025/reservandonos npm run dev para que vite sirva los archivos del front correctamente.
+
+3.-O ejecuta el siguiente comando para correr el contenedor:
+
+    docker run -p 80:80 pabloblanco2025/reservandonos:latest
+    
+4.- Dentro del contenedor ejecuta npm run dev para que vite sirva los archivos del front correctamente. 
+
+    npm run dev
+    
+5.-O inicia el servicio con:
+
+    docker exec -it pabloblanco2025/reservandonos npm run dev.
 
 Notas:
 	
