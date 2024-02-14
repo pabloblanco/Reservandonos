@@ -9,6 +9,9 @@ use Inertia\Inertia;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ApiPlacesController;
 use App\Http\Controllers\PlacesController;
+use App\Http\Controllers\LikeController;
+
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,10 +47,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/get-api-place/{id}', [ApiPlacesController::class, 'getPlaceById']);    
 
     // Rutas del dashboard y lugares
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');   
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');  
     Route::get('/get-places', [PlacesController::class, 'index'])->name('places.index');
     Route::get('/get-place-by-id/{id}', [PlacesController::class, 'show'])->name('place.show');
-    Route::get('/top-five', [PlacesController::class, 'top-five'])->name('places.top-five');    
+    Route::post('/like', [LikeController::class, 'create'])->name('like.create');
+    Route::get('/top-five', [PlacesController::class, 'topFivePlaces'])->name('places.top-five');    
 });
 
 // Incluye las rutas de autenticación desde el archivo 'auth.php'

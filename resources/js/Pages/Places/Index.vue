@@ -7,11 +7,46 @@ export default {
 <script setup>
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import TextInput from '@/Components/TextInput.vue';
+import Swal from 'sweetalert2';
 import { Head } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
+import { ref } from 'vue';
 
 const props = defineProps({
     places:{type:Object}
 });
+
+const form = useForm({
+    place_id: null,
+    place_name: null,
+    place_score: null,
+});
+
+const givemeLike = (id, name, score) =>{
+    const swalWithBootstrapButtons = Swal.mixin({
+        buttonsStyling:true
+    })
+    swalWithBootstrapButtons.fire({
+        title:'Seguro que desea darle like a '+name,
+        text:'',
+        icon:'question',
+        showCancelButton:true,
+        confirmButtonText:'<i class="fa-solid fa-check"></i> Si',
+        cancelButtonText:'<i class="fa-solid fa-ban"></i> Cancelar'
+    }).then((result) => {
+        if(result.isConfirmed){
+
+            // Actualiza los parametros que se enviarán por POST
+            form.place_id = id,
+            form.place_name = name,
+            form.place_score = score,
+
+            // Realiza la solicitud POST
+            form.post(route('like.create'));
+        }
+    })
+};
 
 </script>
 
@@ -32,13 +67,13 @@ const props = defineProps({
                             <a :href="`/get-place-by-id/${place.id}`">
                                 <img :src="place.image_url" :alt="place.name" class="w-full h-auto object-cover object-center lg:h-full lg:w-full">
                             </a>
-                            <a :href="`/set-lovely-place/${place.id}`">    
-                                <button class="w-8 h-8 rounded-full bg-white text-red-500 px-1 py-1 absolute top-2 right-2 transform">
+                            <form @submit.prevent="givemeLike(place.id, place.name, place.score)">
+                                <button class="w-8 h-8 rounded-full bg-white text-red-500 px-1 py-1 absolute top-2 right-2 transform" :disabled="form.processing">
                                     <svg class="w-6 h-6 m-1 fill-current text-red" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path d="m9.653 16.915-.005-.003-.019-.01a20.759 20.759 0 0 1-1.162-.682 22.045 22.045 0 0 1-2.582-1.9C4.045 12.733 2 10.352 2 7.5a4.5 4.5 0 0 1 8-2.828A4.5 4.5 0 0 1 18 7.5c0 2.852-2.044 5.233-3.885 6.82a22.049 22.049 0 0 1-3.744 2.582l-.019.01-.005.003h-.002a.739.739 0 0 1-.69.001l-.002-.001Z" />
                                     </svg>
                                 </button>
-                            </a>
+                            </form>
                         </div>
                         <div class="mt-4 flex justify-left items-start">
                             <div class="h-12 w-12 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">

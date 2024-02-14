@@ -17,6 +17,7 @@ class Place extends Model
     protected $fillable = [
         'id',
         'name',
+        'score',
     ];
 
     /**
@@ -40,3 +41,4 @@ class Place extends Model
     }
 
 }
+
